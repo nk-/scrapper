@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Drupal scrapper Options</title>
+    <script src="../js/factory.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+  </head>
+
+  <body>
+ 
+    <div class="padding mw-320">
+     <img src="../images/logo.png" /> 
+    </div>
+
+    <div id="messages" class="padding"></div>
+
+    <form class="drupal-scrapper" id="drupal-scrapper-options">
+
+      <details open="true" class="no-border">
+        <summary class="padding uppercase">Host data</summary>
+        <div class="description padding"><em>Assign Drupal host related data</em></div>
+
+        <div class="padding form-item">
+          <label for="base_url">Base URL</label>
+          <input class="form-element" type="text" name="base_url" />
+          <div class="description">Drupal website URL, <strong>without trailing slash</strong>, e.g. <em>https://mywebsite.com</em></div>
+        </div>
+
+        <div class="padding form-item">
+          <label for="entry_point">JSON API entry point</label>
+          <input class="form-element" type="text" name="entry_point" />
+          <div class="description">Default is <em>jsonapi</em></div>  
+        </div>
+
+        <div class="padding form-item">
+          <label for="token_uri">Token URI</label>
+          <input class="form-element" type="text" name="token_uri" />
+          <div class="description">Drupal's session token route, default is <em>session/token</em></div> 
+        </div>
+      </details>
+
+      <details open="true" class="no-border">
+        <summary class="padding uppercase">Login data</summary>
+        <div class="description padding">Your Drupal username and password. Note: <em>Specified user must <strong>have Drupal's writing permission ("Create node [type]")</strong> for types of nodes specified below in "Content" fieldset</em></div>
+      
+        <div class="padding form-item">
+          <input class="form-element" type="text" name="name" placeholder="Username" />
+        </div>
+
+        <div class="padding form-item">
+          <input class="form-element" type="Password" name="pass" placeholder="Password" />
+        </div>  
+
+         <input class="form-element" type="hidden" name="uuid" />
+      </details>
+
+      <details open="true" class="no-border">
+        <summary class="padding uppercase">Content</summary>
+        <div class="description padding"><em>Default content values</em></div>
+       
+        <div class="padding form-item">
+          <label for="content_type">Default content type to save in Drupal</label>
+          <input class="form-element" type="text" name="content_type" />
+          <div class="description">A machine name of a content type to save data in, create a new node. E.g. <em>article</em> or <em>issue_updates</em> etc.</div>
+        </div>
+
+        <div class="padding form-item">
+          <label for="content_status" class="checkbox">Published
+            <input type="checkbox" name="content_status" />
+            <span class="checkmark"></span>
+          </label>
+
+          <div class="description">Check this to make created nodes published (status=1)</div>
+        </div>
+      </details>
+
+
+      <details id="post-data-wrapper" open="true" class="no-border">
+       <summary class="padding uppercase">Advanced</summary>
+     
+       <div class="description padding"><em>A few extra features (beta)</em></div>
+
+       <div class="padding form-item">
+         <label for="title">Share to emails</label>
+         <textarea class="form-element" name="emails" placeholder="Emails"> </textarea>
+         <div class="description">A comma separated list of valid email addresses to send info to.</div> 
+       </div>
+
+       <div class="padding form-item">
+         <label for="title">Email subject</label>
+         <input type="text" class="form-element" name="email_subject" placeholder="Email subject" />
+         <div class="description">You can use a few tokens like: <em>@title</em> as a variable for Title field in popup form or <em>@name</em> for username of a user who is sharing/sending emails.</div> 
+       </div>
+
+
+       <div class="padding form-item">
+         <label for="content_type">Relationships fields</label>
+         <input class="form-element" type="text" name="relationships" />
+         <div class="description">A comma separated list of related fields to include in load. E.g. some entityreference, user relationship or similar. See: <a href="https://www.drupal.org/docs/8/modules/jsonapi/creating-new-resources-post#s-post-request-with-relationships" target="blank_">https://www.drupal.org/docs/8/modules/jsonapi/creating-new-resources-post#s-post-request-with-relationships</a></div>
+       </div>
+       
+
+      </details>
+
+     
+
+      <div id="buttons" class="padding flex buttons">
+        <button class="form-submit" id="save">Save</button>
+      </div>
+    </form>
+
+    <script src="../js/options.js"></script>
+
+  </body>
+
+</html>

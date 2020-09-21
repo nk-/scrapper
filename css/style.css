@@ -1,0 +1,307 @@
+a {
+  color: rgb(45, 136, 152, 0.85);
+}
+
+/** 
+ * Form elements
+ */
+
+form {
+  margin: 2rem;
+  width: 100%;
+}
+
+form.fixed-width {
+  margin: 0 auto;
+  max-width: 340px;
+  min-width: 320px;
+}
+
+details {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border: 1px solid #bfbfbf;
+  border-radius: 3px;
+  background-color: #fcfcfa;
+  line-height: 1.295em;
+}
+
+/* Placeholders */
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+  color: #aaa;
+}
+:-moz-placeholder, /* Mozilla Firefox 4 to 18 */
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color: #aaa;
+   opacity: 1;
+}
+:-ms-input-placeholder,  /* Internet Explorer 10-11 */
+::-ms-input-placeholder { /* Microsoft Edge */
+   color: #aaa;
+}
+
+label {
+  color: #aaa;
+  font-size: 1rem;
+}
+
+/* Inputs */
+input[type=text],
+input[type=password],
+select,
+textarea {
+  width: 98%;
+  min-width: 160px;
+  font-size: 1rem;
+  padding: 4px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+}
+
+input[required],
+select[required],
+textarea[required] {
+  border-bottom: 1px solid #a51b00;
+}
+
+/* Select */
+select {
+  display: block;
+  font-size: 1rem;
+  width: calc(100% + 4px);
+  padding: 4px;
+  color: #aaa;
+  box-sizing: border-box;
+  margin: 0;
+  border-radius: 0;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23111111%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'); /* ,linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%); */
+  background-repeat: no-repeat, repeat;
+  background-position: right .7em top 50%, 0 0;
+  background-size: .65em auto, 100%;
+}
+
+select.selected {
+  color: #000;
+}
+
+select[multiple] {
+  background: none;
+  height: 84px;
+  padding:0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+select[multiple] option:checked,
+select[multiple] option:hover {
+  background: rgb(45, 136, 152, 0.85) repeat url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
+  color: #fff;
+}
+select[multiple] option[disabled]:hover {
+  background: none;
+  color: #aaa;
+}
+
+select::-ms-expand {
+  display: none;
+}
+/*
+select:hover {
+  border-color: #888;
+}
+*/
+select:focus {
+  border-color: #aaa;
+  box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7);
+  box-shadow: 0 0 0 3px -moz-mac-focusring;
+  color: #000;
+  outline: none;
+}
+option.placeholder {
+  color: #aaa !important;
+}
+
+
+/* Checkboxes, radios */
+.checkbox {
+  display: block;
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  line-height: 1.3;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkbox input:checked ~ .checkmark {
+  background-color: rgb(45, 136, 152, 0.85); /* #2196F3; */
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox .checkmark:after {
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/* Buttons */
+input[type=submit],
+button,
+.button {
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(45, 136, 152, 0.85);
+  font-size: 1em;
+  padding: 8px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 0 1rem 1rem 0;
+  min-width: 112px;
+  font-size: 0.875rem;
+  display: inline-block;
+  transition: all 0.4s ease 0s;
+}
+
+input[type=submit]:hover,
+button:hover,
+.button:hover,
+summary:hover {
+  cursor: pointer;
+/*   box-shadow: inset 0 0 0 2em var(--hover); */
+  background: rgb(45, 136, 152, 0.85);
+  border-color: #f3faef;
+  transition: all 0.4s ease 0s;
+  color: #fff;
+
+}
+
+/* Disabled button */
+input[type=submit][disabled],
+button[disabled],
+.button[disabled],
+input[type=submit][disabled]:hover,
+button[disabled]:hover,
+.button[disabled]:hover {
+  opacity: 0.65;
+  color: #ccc;
+  border-color: #ccc;
+  background: none;
+  cursor: default;
+}
+
+/** 
+ * Generic classes
+ */
+.hidden {
+  display: none;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.padding {
+  padding: 0.7rem 1rem;
+}
+
+.required {
+  color: #a51b00;
+}
+
+.no-list {
+  list-style: none;
+  margin: 0;
+}
+
+.mw-260,
+.mw-320 {
+ text-align: center;
+}
+
+.mw-260 img {
+  max-width: 260px;
+  margin: 0 auto;
+}
+.mw-320 img {
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.message {
+  background-color: #f3faef;
+  color: #325e1c;
+  font-size: 1rem; 
+  line-height: 1.5;
+  margin: 0 2rem;
+}
+.message.fixed-width {
+  margin: 0 auto;
+}
+.message.inline {
+  margin: 0 auto;
+}
+.message.error {
+  color: #a51b00;
+  background-color: #fcf4f2;  
+}
+
+.message.warning {
+  color: #734c00;
+  background-color: #fdf8ed;
+}

@@ -1,0 +1,9 @@
+{
+  "base_url": "http://dw.absurd.services",
+  "entry_point": "jsonapi",
+  "token_uri": "session/token",
+  "content_type": "issue_updates",
+  "content_status": "On",
+  "email_subject": "@title update shared by @name",
+  "relationships": "issues"
+}

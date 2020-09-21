@@ -1,0 +1,33 @@
+{
+  "name": "Drupal scrapper",
+  "version": "0.2",
+  "description": "Stash this content into Drupal database! Usage of core JSON API",
+  /*
+  "options_ui": {
+    "page": "html/options.html",
+    "open_in_tab": false
+  },
+  */
+  "options_page": "html/options.html",
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_popup": "html/popup.html"
+  },
+  "permissions": [
+    "activeTab", 
+    "storage"
+  ],
+  "background":{
+    "scripts":["js/background.js"],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": ["js/content.js"]
+    }
+  ],
+  "manifest_version": 2
+}

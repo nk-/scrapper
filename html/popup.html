@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Drupal scrapper</title>
+    <script src="../js/factory.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+  </head>
+  <body>
+
+   <div class="padding mw-320">
+     <img src="../images/logo.png" /> 
+   </div>
+
+   <div id="info">
+     <div id="messages" class="message padding hidden fixed-width"></div>
+   </div>
+
+   <form class="fixed-width drupal-scrapper" id="drupal-scrapper">
+
+     <details id="login-wrapper" class="no-border">
+       <summary class="padding uppercase">Login data</summary>
+       
+       <div class="description padding"><em>Your Drupal username and password</em></div>
+       
+       <div class="padding form-item">
+         <input class="form-element" type="text" name="name" placeholder="Username" />
+       </div>
+
+       <div class="padding form-item">
+        <input class="form-element" type="Password" name="pass" placeholder="Password" />
+       </div>  
+       
+       <input class="form-element" type="hidden" name="uuid" />
+ 
+     </details>
+
+     <details id="post-data-wrapper" open="true" class="no-border">
+       <summary class="padding uppercase">Post data</summary>
+     
+       <div class="description padding"><em>Short instructions on usage of fields below</em></div>
+
+       <div class="padding">
+         <!-- <input class="form-element required-border" type="text" maxlength="256" name="title" required="true" placeholder="Title" /><br /> -->
+         <!-- <span class="required">required</span> -->
+         <label for="title">Title</label>
+         <textarea class="form-element has-counter" name="title" maxlength="255" required="true" placeholder="Title"> </textarea>
+       </div>
+
+
+       <div class="padding">
+         <select name="issues" id="issues" class="form-element" multiple>
+           <option class="placeholder" value="" disabled="true">Issues</option>
+         </select>
+         <!-- <input class="form-element" type="text" maxlength="256" name="issues" placeholder="Issues" /> -->
+       </div>  
+     
+       <div class="padding">
+         <label for="url">Share with comment</label>
+         <textarea class="form-element" name="url" placeholder="Share with comment"> </textarea>
+       </div> 
+
+       <div class="padding form-item">
+         <label for="title">Share to emails</label>
+         <textarea class="form-element" name="emails" placeholder="Emails"> </textarea>
+         <div class="description">A comma separated list of valid email addresses</div> 
+       </div>
+       
+     </details>
+    
+     <div id="buttons" class="padding flex buttons">
+       <button name="scrape" disabled="disabled">Scrape page</button>
+       <button name="save">Save in Diplo</button>
+     </div>
+   
+   </form>
+
+   <script src="../js/popup.js"></script>
+
+  </body>
+</html>
