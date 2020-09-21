@@ -1,0 +1,15 @@
+# Defines a route where a client can find information about the authenticated user.
+nk_jsonapi.current_user:
+  path: '/%jsonapi%/me'
+  defaults:
+    _jsonapi_resource: Drupal\nk_jsonapi\Resource\CurrentUserInfo
+  #requirements:
+  #  _user_is_logged_in: 'TRUE'
+
+nk_jsonapi.share:
+  path: '/%jsonapi%/share'
+  methods: ['POST']
+  defaults:
+    _jsonapi_resource: Drupal\nk_jsonapi\Resource\Share
+  requirements:
+    _user_is_logged_in: 'TRUE'

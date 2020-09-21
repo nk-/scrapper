@@ -1,0 +1,7 @@
+name: Nk JSON API
+type: module
+description: 'A custom integrations within JSON API'
+package: "Nk tools"
+core: 8.x
+dependencies:
+  - drupal:jsonapi_resources

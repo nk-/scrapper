@@ -1,0 +1,159 @@
+<?php
+
+/**
+ * Implements hook_mail().
+ */
+function _nk_jsonapi_mail($key, &$message, $params) {
+
+  $options = [
+   'langcode' => $message['langcode'],
+  ];
+  switch ($key) {
+    case 'nk_jsonapi_mail':
+   //   $message['headers'] = $params['headers'];
+     // $message['from'] = $params['from'];
+      //$message['reply-to'] = $params['reply-to']; 
+      $message['subject'] = $params['subject'];
+      $message['body'][] = $params['body'];
+      //if (isset($params['attachments']) && !empty($params['attachments'])) {
+      //  $message['params']['files'] = $params['attachments'];
+     // }
+     break;
+  }
+
+}
+
+
+function nk_jsonapi_mail($key, &$message, $params) {
+  
+  //$data['user'] = $params['account'];
+  //$options['langcode'] = $message['langcode'];
+  //user_mail_tokens($variables, $data, $options);
+  switch ($key) {
+    case 'nk_jsonapi_mail':
+
+      // If the recipient can receive such notices by instant-message, do
+      // not send by email.
+      //if (example_im_send($key, $message, $params)) {
+      //  $message['send'] = FALSE;
+      //  break;
+      //}
+      // Set your message body
+    //$body = $data['body'];
+  
+    // Use the theme to send the message
+    $theme_body = [
+      '#theme' => 'nk_jsonapi_email',
+      '#text' => $params['body'],
+      '#sender_name' => $params['name'],
+    ];
+    
+    // Set up the parameters for your email from the variables
+    //$params['message'] = \Drupal::service('renderer')->render($theme_body); //drupal_render($theme_body);
+
+
+    //$message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed; delsp=yes';
+    //$message['headers']['Content-Transfer-Encoding'] = '16Bit';
+    //$message['headers']['MIME-Version'] = '2.0';
+    //$message['headers']['reply-to'] = $params['from'];
+    //$message['headers']['From'] = $params['from'];
+    //$message['headers']['Sender'] = $message['headers']['Return-Path'] = 'dev@dev.com';
+    //'Return-Path' => 'sender name <' . $from . '>',
+
+    //$message['from'] = 'dev@dev.com'; //'dev@dev.com'; //'text/html; charset=UTF-8; format=flowed; delsp=yes';
+    $message['subject'] = $params['subject']; //t('Notification from @site', $variables, $options);
+    //$body = \Drupal::service('renderer')->render($theme_body);
+    //\Drupal::logger('nk_scrapper_body')->notice('<pre>' . print_r($body, 1) .'</pre>');
+    $message['body'][] = $params['body']; //$body->__toString(); //$params['body']; //t("Dear @username\n\nThere is new content available on the site.", $variables, $options);
+    break;
+  }
+
+}
+
+
+/**
+ * Implements hook_theme().
+ * To add the template definition.
+ **/
+function nk_jsonapi_theme($existing, $type, $theme, $path) {
+  return [
+    'nk_jsonapi_email' => [
+      'variables' => [
+        'text' => NULL,
+        'sender_name' => NULL,
+      ],
+    ], 
+  ];  
+}
+
+/*
+function nk_jsonapi_sendmail($data) {
+
+  // Set a reply-to value
+  $reply_to = $data['reply_to'];
+  
+  // Set a from value
+  $from = $data['from'];
+  
+  // Set a subject
+  $subject = $data['subject']
+  
+  // Set a sender name
+  $sender_name = $data['sender_name'];
+  
+  // Set a recipient email
+  $to = $data['to'];
+  
+  // Set your message body
+  $body = $data['body'];
+  
+  // Use the theme to send the message
+  $theme_body = array(
+    '#theme' => 'nk_scrapper-jsonapi-email',
+    '#text' => $body,
+    '#sender_name' => $sender_name,
+  );
+  
+  // Set up the Drupal Mail manager
+  $mailManager = \Drupal::service('plugin.manager.mail');
+  
+  // Tell the mail system what module you are sending this from
+  $module = 'nk_jsonapi';
+  
+  // Set up the parameters for your email from the variables
+  $params['message'] = drupal_render($theme_body);
+  // Set some header information
+  $params['headers'] = [
+    'content-type' => 'text/html',
+    'MIME-Version' => '1.0',
+    'reply-to' => $data['from'],
+    'from' => 'sender name <' . $from . '>',
+    'Return-Path' => 'sender name <' . $from . '>',
+  ];
+  $params['from'] = $from;
+  $params['subject'] = $subject;
+  
+  // Need to attach a file? Maybe uploaded through a form
+  if(!empty($data['attach'])) {
+    $file_info = array();
+    $file_info['filepath'] = $data['attach']['uri']; // File path
+    $file_info['filename'] = $data['attach']['filename']; //File name
+    $file_info['filemime'] = $data['attach']['filemime']; //File mime type
+    $params['attachments'][] = $file_info;
+  }
+  
+  
+  // Set a key so you can send different types of message
+  $key = 'nk_jsonapi_mail';
+  
+  // Get the language code from your site
+  $langcode = \Drupal::currentUser()->getPreferredLangcode();
+  
+  // Set sending to true in case there is other logic that needs to happen before
+  $send = true;
+  
+  // Send the E-Mail
+  $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+
+}
+*/
