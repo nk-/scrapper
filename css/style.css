@@ -263,9 +263,15 @@ button[disabled]:hover,
   margin: 0;
 }
 
+.mw-120,
 .mw-260,
 .mw-320 {
  text-align: center;
+}
+
+.mw-120 img {
+  max-width: 120px;
+  margin: 0 auto;
 }
 
 .mw-260 img {

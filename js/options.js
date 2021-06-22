@@ -20,19 +20,19 @@ function saveOptions(event) {
       pass: elements.pass ? elements.pass : null,
     };
     
-    //if (!window.scrapperController.userStatus) { // User is NOT logged in Drupal in this browser
-     // window.scrapperController.login(data);
-   // }
-   // else { // User IS logged in this browser, proceed with saving but check and warn about any empty login data fields 
+    if (!window.scrapperController.userStatus) { // User is NOT logged in Drupal in this browser
+      window.scrapperController.login(data);
+    }
+    else { // User IS logged in this browser, proceed with saving but check and warn about any empty login data fields 
       
       // First logout user
       // Note, seems it's the only way to validate password input on our forms, via login callback as otherwise no password is returned from Drupal by any user related JSON API call
-     // window.scrapperController.logout();
+      window.scrapperController.logout();
 
 
-      //setTimeout(function() {
-      //  window.scrapperController.login(data);
-      //}, window.scrapperController.timeouts.appendDelay);
+      setTimeout(function() {
+        window.scrapperController.login(data);
+      }, window.scrapperController.timeouts.appendDelay);
 
      window.scrapperController.asyncRequest('Saving', 'status');
 
@@ -54,7 +54,7 @@ function saveOptions(event) {
           window.scrapperController.error(errors);
         }   
       }, window.scrapperController.timeouts.warningDelay);
-    //}
+    }
 
   });
 }

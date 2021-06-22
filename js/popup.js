@@ -24,7 +24,6 @@ function initPopup() {
       
       var url = config.base_url + '/' + config.token_uri;
       
-      //alert(url);
       callbacks.main = {
         call: 'handshake',
         message: 'Handshaking with Host'
@@ -57,7 +56,6 @@ function initPopup() {
  
   });
 
-  
   /*
   chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
     console.log(request);

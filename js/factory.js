@@ -183,23 +183,26 @@ DrupalScrapper.prototype = {
          }
        }  
      };
-     data.issues.forEach(function(issue) {
-       node.data.relationships.field_update2issues.data.push({"type": "node--issues", "id": issue });
-     });
+     
+     if (data.issues) {
+       data.issues.forEach(function(issue) {
+         node.data.relationships.field_update2issues.data.push({"type": "node--issues", "id": issue });
+        });
+     }
      return node;
    },
 
    defineEmail: function(data) {
-    var mail = {
-      "data" : {
-        "type": "share--share",
-        "attributes": {
-          "title": data.title
-          //"pass": data.pass
-        } 
-      }
-    };
-    return mail;
+     var mail = {
+       "data" : {
+         "type": "share--share",
+         "attributes": {
+           "title": data.title
+           //"pass": data.pass
+         } 
+       }
+     };
+     return mail;
    },
 
 
@@ -515,6 +518,7 @@ DrupalScrapper.prototype = {
       self.messages.wrapper.innerHTML = '<ul class="errors no-list">'; 
     
       errors.forEach(function(error) {
+        console.log(error);
         self.messages.wrapper.innerHTML += error.detail ? '<li class="no-list">' + error.status + ' ' + error.title + '<br />See more details in browser console.' + '</li>' : '<li class="no-list">' + error.status + ' ' + error.title + '</li>';
         if (error.detail) {
           console.log('[' + error.status + '] ' + error.title + ': ' + error.detail);
@@ -662,7 +666,7 @@ DrupalScrapper.prototype = {
     }; 
     self.xhttpOptions = Object.assign(this.xhttpOptions, xhttpOptions);
     console.log(xhttpOptions);
-    self.asyncRequest('Chk', 'status');
+    self.asyncRequest('Sending emails', 'status');
   },
 
 
@@ -929,7 +933,7 @@ DrupalScrapper.prototype = {
       }
  
       // Send a request for Issues
-      self.asyncRequest('Fetching Issues', 'issues', null, persistErrors);
+      // self.asyncRequest('Fetching Issues', 'issues', null, persistErrors);
 
       // Seems like nothing works on fixed popup height?? 
       //document.querySelector('html').style.height = '1000px';
@@ -1014,7 +1018,7 @@ DrupalScrapper.prototype = {
     var self = this;
     var formData = Object.fromEntries(new FormData(document.querySelector('form#drupal-scrapper')).entries());
     var multiSelect = document.getElementById('issues');
-    if (multiSelect.length && multiSelect.hasAttribute('multiple')) {
+    if (multiSelect && multiSelect.hasAttribute('multiple')) {
 
       var multiSelectData = [];
       for (var i = 0; i < multiSelect.options.length; i++) {
@@ -1092,7 +1096,7 @@ DrupalScrapper.prototype = {
       }
     });
    
-    console.log(this.userStatus, data.name, data.pass);
+    console.log(this.userStatus, data);
     //var authorization;
     if (!this.userStatus) {
       if (data.name && data.pass) {
@@ -1105,7 +1109,13 @@ DrupalScrapper.prototype = {
       if (!hasAuthorizationHeader) {
         this.xhttpOptions.headers.post.push({key: 'Authorization', value: 'Basic ' + this.userStatus});
       }
-      this.asyncRequest('Posting data', 'share');
+      
+      if (data.emails) {
+        this.asyncRequest('Posting data', 'share');
+      }
+      else {
+        this.asyncRequest('Posting data', 'status');  
+      }
     } 
      /*
     if (!this.userStatus && data.name && data.pass) {
