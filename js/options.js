@@ -10,7 +10,6 @@ function saveOptions(event) {
   
   if (elements.emails) {
     elements.emails = elements.emails.replace(/^\s+|\s+$/gm,'');//.trim();
-    //console.log(elements.emails.trim());
     document.querySelector('[name="emails"]').value = elements.emails;
   }
 
@@ -28,7 +27,6 @@ function saveOptions(event) {
       // First logout user
       // Note, seems it's the only way to validate password input on our forms, via login callback as otherwise no password is returned from Drupal by any user related JSON API call
       window.scrapperController.logout();
-
 
       setTimeout(function() {
         window.scrapperController.login(data);
@@ -100,9 +98,7 @@ function initOptions() {
       };
     }
 
-
     window.scrapperController = new DrupalScrapper(config, callbacks, xhttpOptions, xhttpData);
-
       
   });
 

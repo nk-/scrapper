@@ -1,5 +1,5 @@
 {
-  "base_url": "https://drupal.absurd.services",
+  "base_url": "",
   "entry_point": "jsonapi",
   "token_uri": "session/token",
   "content_type": "page",

@@ -748,7 +748,7 @@ DrupalScrapper.prototype = {
          //self.asyncRequest(self.messages.authorizationCheck, 'status'); //'setLoginData');
             
          // In case of any authorization related warnings show them with a delay
-/*
+         /*
          if (self.xhttpCallbacks.context === 'options') {
            var error = self.messages.unauthorizedOptions.replace('@drupalLogin', self.config.base_url + '/user/login');
            var errors = [{ status: 'Notice: ', title: self.messages.authenticated, type: 'warning' }];
@@ -756,7 +756,7 @@ DrupalScrapper.prototype = {
              self.error(errors);
            }, self.timeouts.warningDelay);
          }
-*/
+         */
       }
       else {
         if (callback) {
@@ -820,15 +820,13 @@ DrupalScrapper.prototype = {
 
  
   goToOptions: function() {
-    //document.querySelector('#go-to-options').addEventListener(function() {
     if (chrome.runtime.openOptionsPage) {
       chrome.runtime.openOptionsPage();
     }
     else {
       window.open(chrome.runtime.getURL('html/options.html'));
     }
-   //});
- },
+  },
      
   getLocalConfig: function(response) {
     this.config = response;
@@ -1137,11 +1135,7 @@ DrupalScrapper.prototype = {
        this.xhttpOptions.headers.post.push({key: 'Authorization', value: 'Basic ' + this.userStatus});
      }
    }
-*/
-
-  
-
-   //this.asyncRequest('Posting data', 'share');
+  */
       
   },
 

@@ -2,35 +2,29 @@
 
 namespace Drupal\nk_jsonapi\Resource;
 
+use Symfony\Component\Routing\Route;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
+
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Access\CsrfRequestHeaderAccessCheck;
 use Drupal\Core\Access\CsrfTokenGenerator;
-
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-
 use Drupal\Core\Mail\MailManagerInterface;
 use Drupal\Core\Cache\CacheableMetadata;
+
 use Drupal\Component\Serialization\Json;
 
 use Drupal\user\UserInterface;
-
-//use Drupal\jsonapi\JsonApiResource\JsonApiDocumentTopLevel;
 use Drupal\jsonapi\JsonApiResource\LinkCollection;
-use Drupal\jsonapi\ResourceResponse;
 use Drupal\jsonapi\ResourceType\ResourceType;
 use Drupal\jsonapi\ResourceType\ResourceTypeAttribute;
 use Drupal\jsonapi\JsonApiResource\ResourceObject;
 use Drupal\jsonapi\JsonApiResource\ResourceObjectData;
 
 use Drupal\jsonapi_resources\Resource\ResourceBase;
-// use Drupal\jsonapi_resources\Resource\EntityQueryResourceBase;
-
-use Symfony\Component\Routing\Route;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Processes a request for the authenticated user's information.
@@ -94,9 +88,6 @@ class Share extends ResourceBase implements ContainerInjectionInterface {
       $container->get('request_stack')
     );
   }
-
-
-   // 
   
   /**
    * Process the resource request.
@@ -125,18 +116,16 @@ class Share extends ResourceBase implements ContainerInjectionInterface {
       $current_user->uuid(),
       NULL,
       [
-        'share' => 'Si claro', //$current_user->getDisplayName(),
-        //'roles' => $current_user->getRoles(TRUE),
+        'share' => $current_user->getDisplayName(),
+        'roles' => $current_user->getRoles(TRUE),
         'shareWith' => 'Oh yes',
         'token' => $this->tokenGenerator->get(CsrfRequestHeaderAccessCheck::TOKEN_KEY),
       ],
       $links
     );
 
-    //$primary_data = new ResourceObject(NULL,
-    $content = $request->getContent(); //$request->request->get('title'); //$request->request->all(); //get('title', 'content_type');
+    $content = $request->getContent();
     $data = $content ? Json::decode($content) : []; 
-    //\Drupal::logger('diplo_view_displays')->notice('<pre>' . print_r($data['emails'], 1) .'</pre>');
 
     $response_data = new ResourceObjectData([$primary_data], 1);
     $response = $this->createJsonapiResponse($response_data, $request);
@@ -175,7 +164,7 @@ class Share extends ResourceBase implements ContainerInjectionInterface {
 
   protected function constructMail($data, $current_user, $response) {
   
-/*
+    /*
     // Set a reply-to value
     $reply_to = $data['reply_to'];
   
@@ -214,12 +203,12 @@ class Share extends ResourceBase implements ContainerInjectionInterface {
     $params['headers'] = [
       'content-type' => 'text/html',
       'MIME-Version' => '1.0',
-      'reply-to' => 'nenadkesic@gmail.com',
+      'reply-to' => 'dev@dev.com',
       'from' => $sender_name .' <' . $from . '>',
       'Return-Path' => $sender_name .' <' . $from . '>',
     ];
     $params['from'] = $from;
-    $params['reply-to'] = 'nenadkesic@gmail.com';
+    $params['reply-to'] = 'dev@dev.com';
     $params['subject'] = $subject;
     
     // Need to attach a file? Maybe uploaded through a form
@@ -233,30 +222,29 @@ class Share extends ResourceBase implements ContainerInjectionInterface {
     
     // Set a key so you can send different types of message
     $key = 'nk_jsonapi_mail';
-*/
+   */
   
-/*
+    /*
     $params['headers'] = [
       'content-type' => 'text/html',
       'MIME-Version' => '1.0',
-      'reply-to' => 'nenadkesic@gmail.com',
-      'from' => 'Test user <nenadkesic@gmail.com>', //$sender_name .' <' . $from . '>',
-      'Return-Path' => 'Test user <nenadkesic@gmail.com>', //$sender_name .' <' . $from . '>',
+      'reply-to' => 'dev@dev.com',
+      'from' => 'Test user <dev@dev.com>', //$sender_name .' <' . $from . '>',
+      'Return-Path' => 'Test user <dev@dev.com>', //$sender_name .' <' . $from . '>',
     ];
-*/
+    */
+
     // Get the language code from your site
     $langcode = $current_user->getPreferredLangcode(); // \Drupal::currentUser()->getPreferredLangcode();
   
     // Set sending to true in case there is other logic that needs to happen before
-    $send = true;
+    $send = TRUE;
   
     // Send the E-Mail
     //$params['account'] = $current_user;
 
-    
     $result = $this->mailManager->mail('nk_jsonapi', 'nk_jsonapi_mail', $data['to'], $langcode, $data); //, NULL, $send);
     if ($result['result']) {
-      //\Drupal::logger('diplo_send')->notice('<pre>' . print_r($result, 1) .'</pre>');
       return $response;
     } 
     return $response;

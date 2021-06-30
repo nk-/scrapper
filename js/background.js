@@ -7,10 +7,3 @@ chrome.runtime.onInstalled.addListener(function() {
   }
   return false;
 });
-
-/*
-document.addEventListener('DOMContentLoaded', function(event) {
-  console.log(event);
-  chrome.runtime.sendMessage({initSome: 'Yeah'});
-});
-*/
