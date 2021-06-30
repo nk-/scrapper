@@ -11,3 +11,5 @@ On Drupal host:
 In Chrome browser:
 - Install development extension in Chrome browser at chrome://extensions/ with a "Developer mode" switched on in top right corner there click on "Load unpacked" button showing now in top-left area and point to directory where plugin is placed (root of manifest.json file)
 - You will be automatically redirected to extension options where you should set data related to a JSON API host (Drupal) and a few others
+
+![](Scrapper.gif)
